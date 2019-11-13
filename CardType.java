@@ -17,11 +17,11 @@ public enum CardType {
    
    private final int number;
    
-   CardType(int num) {
-      this.number = num;
+   CardType(int number) {
+      this.number = number;
    }
    
-   public int getNumber() {
+   public int getNumType() {
       return number;
    }
    
@@ -30,8 +30,8 @@ public enum CardType {
          case SKIP: return "skip";
          case REVERSE: return "reverse";
          case PLUS_TWO: return "plus two";
-         case WILDCARD: return "wildcard";
-         case PLUS_FOUR_WILDCARD: return "plus four wildcard";
+         case WILDCARD: return "Wildcard";
+         case PLUS_FOUR_WILDCARD: return "Plus four wildcard";
          default: return "" + this.number;
       }
    }

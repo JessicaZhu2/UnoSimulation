@@ -3,25 +3,25 @@ public enum CardColor {
    BLUE   (2),
    GREEN  (3),
    YELLOW (4),
-   WILD   (5);
+   NONE   (5);
    
-   private final int color;
+   private final int number;
    
-   CardColor(int color) {
-      this.color = color;
+   CardColor(int number) {
+      this.number = number;
    }
    
    public int getNumColor() {
-      return color;
+      return number;
    }
    
    public String toString() {
       switch (this) {
-         case RED: return "Red";
-         case BLUE: return "Blue";
-         case GREEN: return "Green";
-         case YELLOW: return "Yellow";
-         case WILD: return "";
+         case RED: return "RED ";
+         case BLUE: return "BLUE ";
+         case GREEN: return "GREEN ";
+         case YELLOW: return "YELLOW ";
+         case NONE: return "";
          default: throw new IllegalStateException("Invalid color");
       }
    }

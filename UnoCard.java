@@ -2,17 +2,17 @@ public class UnoCard {
    private final CardType type;
    private final CardColor color;
    
-   public UnoCard(CardType type, CardColor color) {
-      this.type = type;
+   public UnoCard(CardColor color, CardType type) {
       this.color = color;
-   }
-   
-   public CardType getCardType() {
-      return type;
+      this.type = type;
    }
    
    public CardColor getCardColor() {
       return color;
+   }
+   
+   public CardType getCardType() {
+      return type;
    }
    
    public boolean sameColorAs(UnoCard other) {
@@ -20,7 +20,7 @@ public class UnoCard {
    }
    
    public boolean sameNumberAs(UnoCard other) {
-      return other.type.getNumber() == this.type.getNumber();
+      return other.type.getNumType() == this.type.getNumType();
    }
    
    public String toString() {
