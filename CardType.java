@@ -1,3 +1,5 @@
+// All possible standard types of Uno cards
+
 public enum CardType {
    ZERO               (0),
    ONE                (1),
@@ -11,27 +13,32 @@ public enum CardType {
    NINE               (9),
    SKIP               (10),
    REVERSE            (11),
-   PLUS_TWO           (12),
+   DRAW_TWO           (12),
    WILDCARD           (13),
-   PLUS_FOUR_WILDCARD (14);
+   DRAW_FOUR_WILDCARD (14);
    
-   private final int number;
+   private final int number; // integer corresponding to Uno card type
    
+   // Constructs a CardType
+   // Parameter:
+   //    number = integer corresponding to Uno card type
    CardType(int number) {
       this.number = number;
    }
    
+   // Returns the integer that represents the card type.
    public int getNumType() {
       return number;
    }
    
+   // Returns a string with the name of the card type. 
    public String toString() {
       switch (this) {
          case SKIP: return "skip";
          case REVERSE: return "reverse";
-         case PLUS_TWO: return "plus two";
+         case DRAW_TWO: return "draw two";
          case WILDCARD: return "Wildcard";
-         case PLUS_FOUR_WILDCARD: return "Plus four wildcard";
+         case DRAW_FOUR_WILDCARD: return "Draw four wildcard";
          default: return "" + this.number;
       }
    }
