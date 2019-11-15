@@ -28,16 +28,18 @@ public class UnoGame {
 //          playingOrder.add(playingOrder.remove());
 //          playerNumber.add(playerNumber.remove());
 //       }
-
-      currentplayer = 1;
       
       UnoCard dicardPileTop = dealingDeck.drawTopCard();
+      
+      // Classic Uno rules says you can't start with wild draw four card, so we keep drawing
+      // until the starting card in the discard pile is not a wild draw four.
       while (dicardPileTop.getCardTypeNum() == 14) {
          dicardPileTop = dealingDeck.drawTopCard();
       }
       
       playingOrder.add(playingOrder.remove);
-      playerNumber.add(playerNumber.remove);
+      
+      // INSERT MISSING FIRST TURN RULES
       
       while (!win) {
          dicardTypeNum = dicardPileTop.getCardTypeNum();
@@ -50,7 +52,7 @@ public class UnoGame {
          
          switch (discardTypeNum) {
             case 14:
-               discardColorNum = playerNumber.peek(); 
+               discardColorNum = playerNumber.peek(); //
                break;
             case 13:
                discardColorNum = playerNumber.peek();

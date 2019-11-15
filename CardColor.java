@@ -1,6 +1,6 @@
 // All possible standard colors of Uno card
 public enum CardColor {
-   NONE   (0),
+   NONE   (0), // Wildcard
    RED    (1),
    BLUE   (2),
    GREEN  (3),
