@@ -7,9 +7,10 @@ public class UnoGame {
    public static void main(String[] args) {
       UnoDeck dealingDeck = new UnoDeck();
       UnoDeck playingDeck = new UnoDeck();
+      StateOfGame gameState = new StateOfGame();
       //playingDeck.printDeck();
 
-      dealDeck.shuffle();
+      dealingDeck.shuffle();
       //dealDeck.printDeck();
       
       Queue<UnoPlayer> playingOrder = new LinkedList<UnoPlayer>();
@@ -33,20 +34,18 @@ public class UnoGame {
       
       // Classic Uno rules says you can't start with wild draw four card, so we keep drawing
       // until the starting card in the discard pile is not a wild draw four.
-      while (dicardPileTop.getCardTypeNum() == 14) {
+      while (dicardPileTop.getCardType().getNumType() == 14) {
          dicardPileTop = dealingDeck.drawTopCard();
       }
       
-      playingOrder.add(playingOrder.remove);
+      playingOrder.add(playingOrder.remove());
       
       // INSERT MISSING FIRST TURN RULES
       
-      while (!win) {
-         dicardTypeNum = dicardPileTop.getCardTypeNum();
-         dicardColorNum = dicardPileTop.getCardColorNum();
-         UnoHand currentHand = playingOrder.peek();
-         int currentPlayer = playerNumber.peek();
-         
+      while (!gameState.win) {
+         CardType dicardType = dicardPileTop.getCardType();
+         CardColor dicardColor = dicardPileTop.getCardColor();
+         UnoPlayer currentPlayer = playingOrder.peek();
          // discardPileTop = playCard(currentHand, stackDrawTwo, stackDrawFour)
          
          
@@ -71,32 +70,29 @@ public class UnoGame {
             // Let player decide base on strategy;
          }
          if (currentHand.isEmpty()) {
-            win = true;
-            playerWinner = currentPlayer;
+            gameState.win = true;
+            gameState.playerWinner = currentPlayer;
          }
       }
       
       System.out.println("Winner: Player #" + currentPlayer);
    }
    
-   private class StateOfGame {
+   private static class StateOfGame {
       public int playerWinner;
       public int stackDrawValue;
-      boolean win;
-      boolean skip;
-      boolean stackDrawTwo;
-      boolean stackDrawFour;
+      public boolean win;
+      public boolean skip;
+      public boolean stackingDrawTwo;
+      public boolean stackingDrawFour;
       
       public StateOfGame() {
          playerWinner = 0;
          stackDrawValue = 0;
          win = false;
          skip = false;
-         stackDrawTwo = false;
-         stackDrawFour = false;
-      }
-      
-      public c
-      
+         stackingDrawTwo = false;
+         stackingDrawFour = false;
+      }    
    }
 }
