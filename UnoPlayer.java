@@ -35,7 +35,7 @@ public class UnoPlayer {
       if (playableCards.isEmpty()) {
          return null;
       } else {
-         Set<UnoCard> sameTypeCards = new HashSet<UnoCard>();
+         List<UnoCard> sameTypeCards = new LinkedList<UnoCard>();
          List<UnoCard> notSameTypeCards = new LinkedList<UnoCard>();
          for (UnoCard card : playableCards) {
             if (card.sameTypeAs(keepCardType)) {
@@ -44,12 +44,13 @@ public class UnoPlayer {
                notSameTypeCards.add(card);
             }
          }
-         if (sameTypeCards.isEmpty()) {
-            return null;
-         } else {
-            Random rand = new Random();
+         Random rand = new Random();
+         if (sameTypeCards.isEmpty() || !notSameTypeCards.isEmpty()) {
             int randIndex = rand.nextInt(notSameTypeCards.size());
             return notSameTypeCards.get(randIndex);
+         } else {
+            int randIndex = rand.nextInt(sameTypeCards.size());
+            return sameTypeCards.get(randIndex);
          }
       }
    }
