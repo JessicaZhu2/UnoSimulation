@@ -77,7 +77,11 @@ public class UnoGame {
          UnoCard newCard = currentPlayer.playCard(discardPileTop,
                                                   gameState.stackingDrawTwo,
                                                   gameState.stackingDrawTwo);
+
+         //If newCard is null, then player has no playable cards in their hand
          if (newCard == null) {
+            //If current played card is a draw two or draw four card, then player has to draw ‘stackDrawValue’
+            // number of cards
             if (gameState.stackingDrawTwo || gameState.stackingDrawFour) {
                for (int i = 0; i < gameState.stackDrawValue; i++) {
                   UnoCard drawnCard = playingDeck.copyRandomCard();
@@ -86,14 +90,19 @@ public class UnoGame {
                gameState.stackingDrawTwo = false;
                gameState.stackingDrawFour = false;
                gameState.stackDrawValue = 0;
+            // If not a draw two or draw four card, then player just draw one card from playing Deck
             } else {
                UnoCard drawnCard = playingDeck.copyRandomCard();
                currentPlayer.hand().addCard(drawnCard);
             }
             playingOrder.add(playingOrder.remove());
          } else {
+            // If player has playable card in their hand, then perform action based on the type of card on
+            // the top of the discard pile
             discardPileTop = newCard;
             switch (discardPileTop.getCardType()) {
+               // Increment stack draw value by 4
+               //Set discardColor to the player’s chosen color  (choose the color that they have most cards of)
                case DRAW_FOUR_WILDCARD:
                   gameState.stackingDrawFour = true;
                   gameState.stackDrawValue += 4;
@@ -126,6 +135,7 @@ public class UnoGame {
                   break;
                }
             }
+            // If currentPlayer has empty hand than that player is the winner
             if (currentPlayer.hand().isEmpty()) {
             gameState.win = true;
             gameState.playerWinner = currentPlayer.playerNumber();
