@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1b2626d4-0adb-4837-84e8-1fcd2ee18bea" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnoGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnoPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoPlayer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +14,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.17005815">
+    <splitter split-orientation="horizontal" split-proportion="0.42945206">
       <split-first>
         <leaf>
           <file pinned="false" current-in-tab="false">
@@ -33,20 +33,20 @@
               <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/UnoCard.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="461">
-                  <caret line="95" column="21" lean-forward="true" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
+                <state relative-caret-position="493">
+                  <caret line="33" column="3" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/UnoHand.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="102">
-                  <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+                <state relative-caret-position="246">
+                  <caret line="82" column="34" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="34" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#2086#2087#0" expanded="true" />
@@ -103,11 +103,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/UnoGame.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="337">
-                  <caret line="137" column="77" selection-start-line="137" selection-start-column="77" selection-end-line="137" selection-end-column="77" />
+                <state relative-caret-position="439">
+                  <caret line="134" column="24" lean-forward="true" selection-start-line="134" selection-start-column="24" selection-end-line="134" selection-end-column="24" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -119,7 +119,7 @@
             <entry file="file://$PROJECT_DIR$/UnoPlayer.class">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="521">
-                  <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+                  <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
                   <folding>
                     <element signature="e#0#465#0" expanded="true" />
                   </folding>
@@ -127,11 +127,18 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/UnoPlayer.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+                <state relative-caret-position="153">
+                  <caret line="15" column="76" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="76" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#472#473#0" expanded="true" />
+                    <element signature="e#509#510#0" expanded="true" />
+                    <element signature="e#540#541#0" expanded="true" />
+                    <element signature="e#569#570#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -140,6 +147,12 @@
       </split-second>
     </splitter>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>uniqueCards</find>
+      <find>unohand</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -147,12 +160,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/UnoGame.java" />
+        <option value="$PROJECT_DIR$/UnoCard.java" />
+        <option value="$PROJECT_DIR$/UnoPlayer.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="632" />
-    <option name="width" value="1297" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="width" value="977" />
     <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
@@ -197,7 +212,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="506" y="0" width="1037" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
@@ -205,7 +220,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.032753326" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.020134227" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
@@ -228,23 +243,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/UnoPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UnoPlayer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
-          <folding>
-            <element signature="e#0#465#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UnoDeck.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -255,10 +253,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UnoPlayer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
+          <folding>
+            <element signature="e#0#465#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/UnoHand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        <state relative-caret-position="246">
+          <caret line="82" column="34" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2086#2087#0" expanded="true" />
@@ -273,12 +281,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CardType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/UnoGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="137" column="77" selection-start-line="137" selection-start-column="77" selection-end-line="137" selection-end-column="77" />
+        <state relative-caret-position="439">
+          <caret line="134" column="24" lean-forward="true" selection-start-line="134" selection-start-column="24" selection-end-line="134" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UnoCard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="33" column="3" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UnoPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="76" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#472#473#0" expanded="true" />
+            <element signature="e#509#510#0" expanded="true" />
+            <element signature="e#540#541#0" expanded="true" />
+            <element signature="e#569#570#0" expanded="true" />
           </folding>
         </state>
       </provider>
