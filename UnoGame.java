@@ -8,34 +8,34 @@ public class UnoGame {
       UnoDeck dealingDeck = new UnoDeck();
       UnoDeck playingDeck = new UnoDeck();
       StateOfGame gameState = new StateOfGame();
-      //playingDeck.printDeck();
+      // playingDeck.printDeck();
 
       dealingDeck.shuffle();
-      //dealDeck.printDeck();
+      // dealingDeck.printDeck();
       
       Queue<UnoPlayer> playingOrder = new LinkedList<UnoPlayer>();
+      Stack<UnoPlayer> flipOrder = new Stack<UnoPlayer>();
       
       for (int i = 0; i < NUM_PLAYERS; i++) {
          UnoHand hand = new UnoHand();
          hand.dealNewHand(dealingDeck);
-         UnoPlayer player = new UnoPlayer(i, hand);
+         UnoPlayer player = new UnoPlayer(i, hand, 12);
          playingOrder.add(player);
       }
       
 //       for (int i = 0; i < NUM_PLAYERS; i++) {
-//          UnoHand hand = playingOrder.peek();
+//          UnoHand hand = playingOrder.peek().hand();
 //          hand.printHand();
-//          System.out.println(" " + playerNumber.peek());
+//          System.out.println(" " + playerOrder.peek().playerNumber());
 //          playingOrder.add(playingOrder.remove());
-//          playerNumber.add(playerNumber.remove());
 //       }
       
-      UnoCard dicardPileTop = dealingDeck.drawTopCard();
+      UnoCard discardPileTop = dealingDeck.drawTopCard();
       
       // Classic Uno rules says you can't start with wild draw four card, so we keep drawing
       // until the starting card in the discard pile is not a wild draw four.
-      while (dicardPileTop.getCardType().getNumType() == 14) {
-         dicardPileTop = dealingDeck.drawTopCard();
+      while (discardPileTop.getCardType().getNumType() == 14) {
+         discardPileTop = dealingDeck.drawTopCard();
       }
       
       playingOrder.add(playingOrder.remove());
@@ -43,39 +43,68 @@ public class UnoGame {
       // INSERT MISSING FIRST TURN RULES
       
       while (!gameState.win) {
-         CardType dicardType = dicardPileTop.getCardType();
-         CardColor dicardColor = dicardPileTop.getCardColor();
+         CardType discardType = discardPileTop.getCardType();
+         CardColor discardColor = discardPileTop.getCardColor();
          UnoPlayer currentPlayer = playingOrder.peek();
          // discardPileTop = playCard(currentHand, stackDrawTwo, stackDrawFour)
+         UnoCard newCard = currentPlayer.playCard();// pass in state of game
          
-         
-         switch (discardTypeNum) {
-            case 14:
-               discardColorNum = playerNumber.peek(); //
-               break;
-            case 13:
-               discardColorNum = playerNumber.peek();
-               break;
-            case 12:
-               discardColorNum = playerNumber.peek();
-               break;
-            case 11:
-               discardColorNum = playerNumber.peek();
-               break;
-            case 10:
-               discardColorNum = playerNumber.peek();
-               break;
-            default: // Card is number card 0-9
+         if (newCard == null) {
+            if (gameState.stackingDrawTwo || gameState.stackingDrawFour) {
+               for (int i = 0; i < gameState.stackDrawValue; i++) {
+                  UnoCard drawnCard = playingDeck.copyRandomCard();
+                  currentPlayer.hand().addCard(drawnCard);
+               }
+               gameState.stackingDrawTwo = false;
+               gameState.stackingDrawFour = false;
+               gameState.stackDrawValue = 0;
+            } else {
+               UnoCard drawnCard = playingDeck.copyRandomCard();
+               currentPlayer.hand().addCard(drawnCard);
+               playingOrder.add(playingOrder.remove());
+            }
+         } else {
+            discardPileTop = newCard;
+            switch (discardPileTop.getCardType()) {
+               case DRAW_FOUR_WILDCARD:
+                  gameState.stackingDrawFour = true;
+                  gameState.stackDrawValue += 4;
+                  discardColor = currentPlayer.chooseColor();
+                  break;
+               case WILDCARD:
+                  discardColor = currentPlayer.chooseColor();
+                  playingOrder.add(playingOrder.remove());
+                  break;
+               case DRAW_TWO:
+                  gameState.stackingDrawTwo = true;
+                  gameState.stackDrawValue += 2;
+                  playingOrder.add(playingOrder.remove());
+                  break;
+               case REVERSE:
+                  while(!playingOrder.isEmpty()) {
+                     flipOrder.push(playingOrder.remove());
+                  }
+                  while(!flipOrder.isEmpty()) {
+                     playingOrder.add(flipOrder.pop());
+                  }
+                  break;
+               case SKIP:
+                  playingOrder.add(playingOrder.remove());
+                  playingOrder.add(playingOrder.remove());
+                  break;
+               default:
+                  playingOrder.add(playingOrder.remove());
+                  break;
             
-            // Let player decide base on strategy;
+            }
          }
-         if (currentHand.isEmpty()) {
+         if (currentPlayer.hand().isEmpty()) {
             gameState.win = true;
-            gameState.playerWinner = currentPlayer;
+            gameState.playerWinner = currentPlayer.playerNumber();
          }
       }
       
-      System.out.println("Winner: Player #" + currentPlayer);
+      System.out.println("Winner: Player #" + gameState.playerWinner);
    }
    
    private static class StateOfGame {

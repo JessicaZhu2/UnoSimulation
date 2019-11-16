@@ -20,16 +20,23 @@ public class UnoHand {
    public void dealNewHand(UnoDeck deck) {
       for (int i = 0; i < 7; i++) {
          UnoCard card = deck.drawTopCard();
-         int colorIndex = card.getCardColor().getNumColor();
-         int typeIndex = card.getCardType().getNumType();
-         numEachColor[colorIndex]++;
-         numEachType[typeIndex]++;
-         
-         if (!cardCounts.containsKey(card)) {
-            cardCounts.put(card, 1);
-         } else {
-            cardCounts.put(card,cardCounts.get(card) + 1);
-         }
+         addCard(card);
+      }
+   }
+   
+   // Adds an UnoCard to the hand
+   // Parameter:
+   //    card = UnoCard to add to the deck
+   public void addCard(UnoCard card) {
+      int colorIndex = card.getCardColor().getNumColor();
+      int typeIndex = card.getCardType().getNumType();
+      numEachColor[colorIndex]++;
+      numEachType[typeIndex]++;
+      
+      if (!cardCounts.containsKey(card)) {
+         cardCounts.put(card, 1);
+      } else {
+         cardCounts.put(card,cardCounts.get(card) + 1);
       }
    }
    
