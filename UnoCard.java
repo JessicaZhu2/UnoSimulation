@@ -60,8 +60,8 @@ public class UnoCard {
    
    // Returns if the card is playable given a situation in Uno
    // Parameters:
-   //    currentType      = current type of card on top of discard pile
-   //    currentColor     = current color of card on top of discard pile
+   //    currentType      = type of UnoCard 
+   //    currentColor     = color of UnoCard
    //                       (chosen color if wildcard) 
    //    stackingDrawTwo  = whether draw twos are being stacked
    //    stackingDrawFour = whether draw fours are being stacked

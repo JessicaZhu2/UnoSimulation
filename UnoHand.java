@@ -1,5 +1,6 @@
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 
 // Represents a hand of Uno Card.
 public class UnoHand {
@@ -76,6 +77,11 @@ public class UnoHand {
    // Returns true/false for whether the hand is empty
    public boolean isEmpty() {
       return cardCounts.isEmpty();
+   }
+   
+   // 
+   public Set<UnoCard> uniqueCards() {
+      return cardCounts.keySet();
    }
    
    // Prints out all the cards in the hand.

@@ -34,21 +34,49 @@ public class UnoGame {
       
       // Classic Uno rules says you can't start with wild draw four card, so we keep drawing
       // until the starting card in the discard pile is not a wild draw four.
-      while (discardPileTop.getCardType().getNumType() == 14) {
+      while (discardPileTop.getCardType() == CardType.DRAW_FOUR_WILDCARD) {
          discardPileTop = dealingDeck.drawTopCard();
       }
       
-      playingOrder.add(playingOrder.remove());
-      
-      // INSERT MISSING FIRST TURN RULES
+      switch (discardPileTop.getCardType()) {
+         case DRAW_FOUR_WILDCARD:
+            gameState.stackingDrawFour = true;
+            gameState.stackDrawValue += 4;
+            discardColor = currentPlayer.chooseColor();
+            playingOrder.add(playingOrder.remove());
+            break;
+         case WILDCARD:
+            discardColor = currentPlayer.chooseColor();
+            playingOrder.add(playingOrder.remove());
+            break;
+         case DRAW_TWO:
+            gameState.stackingDrawTwo = true;
+            gameState.stackDrawValue += 2;
+            playingOrder.add(playingOrder.remove());
+            break;
+         case REVERSE:
+            while(!playingOrder.isEmpty()) {
+               flipOrder.push(playingOrder.remove());
+            }
+            while(!flipOrder.isEmpty()) {
+               playingOrder.add(flipOrder.pop());
+            }
+            break;
+         case SKIP:
+            playingOrder.add(playingOrder.remove());
+            playingOrder.add(playingOrder.remove());
+            break;
+         default:
+            playingOrder.add(playingOrder.remove());
+            break;
+      }
+
       
       while (!gameState.win) {
-         CardType discardType = discardPileTop.getCardType();
-         CardColor discardColor = discardPileTop.getCardColor();
          UnoPlayer currentPlayer = playingOrder.peek();
-         // discardPileTop = playCard(currentHand, stackDrawTwo, stackDrawFour)
-         UnoCard newCard = currentPlayer.playCard();// pass in state of game
-         
+         UnoCard newCard = currentPlayer.playCard(discardPileTop,
+                                                  gameState.stackingDrawTwo,
+                                                  gameState.stackingDrawTwo);
          if (newCard == null) {
             if (gameState.stackingDrawTwo || gameState.stackingDrawFour) {
                for (int i = 0; i < gameState.stackDrawValue; i++) {
@@ -61,8 +89,8 @@ public class UnoGame {
             } else {
                UnoCard drawnCard = playingDeck.copyRandomCard();
                currentPlayer.hand().addCard(drawnCard);
-               playingOrder.add(playingOrder.remove());
             }
+            playingOrder.add(playingOrder.remove());
          } else {
             discardPileTop = newCard;
             switch (discardPileTop.getCardType()) {
@@ -70,6 +98,7 @@ public class UnoGame {
                   gameState.stackingDrawFour = true;
                   gameState.stackDrawValue += 4;
                   discardColor = currentPlayer.chooseColor();
+                  playingOrder.add(playingOrder.remove());
                   break;
                case WILDCARD:
                   discardColor = currentPlayer.chooseColor();
@@ -95,10 +124,9 @@ public class UnoGame {
                default:
                   playingOrder.add(playingOrder.remove());
                   break;
-            
+               }
             }
-         }
-         if (currentPlayer.hand().isEmpty()) {
+            if (currentPlayer.hand().isEmpty()) {
             gameState.win = true;
             gameState.playerWinner = currentPlayer.playerNumber();
          }
@@ -119,7 +147,6 @@ public class UnoGame {
          playerWinner = 0;
          stackDrawValue = 0;
          win = false;
-         skip = false;
          stackingDrawTwo = false;
          stackingDrawFour = false;
       }    

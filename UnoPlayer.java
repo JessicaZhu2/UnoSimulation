@@ -1,12 +1,18 @@
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Random;
+
 public class UnoPlayer {
    private final int playerNumber;
    private final UnoHand hand;
-   private final int keepCardType;
+   private final CardType keepCardType;
    
-   public UnoPlayer(int playerNumber, UnoHand hand, int numCardType) {
+   public UnoPlayer(int playerNumber, UnoHand hand, CardType cardType) {
       this.playerNumber = playerNumber;
       this.hand = hand;
-      this.keepCardType = numCardType;
+      this.keepCardType = cardType;
    }
    
    public int playerNumber() {
@@ -17,12 +23,35 @@ public class UnoPlayer {
       return this.hand;
    }
    
-   public UnoCard playCard() {
-      //if () {
-      //   hand.playCard();
-      //else {
+   public UnoCard playCard(CardType discardType, CardColor discardColor,
+                           boolean stackingDrawFour, boolean stackingDrawTwo) {
+      Set<UnoCard> playableCards = new HashSet<UnoCard>();
+      
+      for (UnoCard card : hand.uniqueCards()) {
+         if (card.playableOn(discardType, discardColor, stackingDrawTwo, stackingDrawFour))  {
+            playableCards.add(card);
+         }
+      }
+      if (playableCards.isEmpty()) {
          return null;
-      //}
+      } else {
+         Set<UnoCard> sameTypeCards = new HashSet<UnoCard>();
+         List<UnoCard> notSameTypeCards = new LinkedList<UnoCard>();
+         for (UnoCard card : playableCards) {
+            if (card.sameTypeAs(keepCardType)) {
+               sameTypeCards.add(card);
+            } else {
+               notSameTypeCards.add(card);
+            }
+         }
+         if (sameTypeCards.isEmpty()) {
+            return null;
+         } else {
+            Random rand = new Random();
+            int randIndex = rand.nextInt(notSameTypeCards.size());
+            return notSameTypeCards.get(randIndex);
+         }
+      }
    }
    
    public CardColor chooseColor() {
