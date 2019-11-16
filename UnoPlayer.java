@@ -56,6 +56,21 @@ public class UnoPlayer {
    
    public CardColor chooseColor() {
       // IMPLEMENT SWITCHING TO GREATEST NUMBER NONWILDCARD COLOR AND RAND COLOR IF LAST CARD OR TIED
-      return CardColor.RED;
+      int[] numEachColor = hand.numEachColor();
+      int maxNumColorIndex = 1;
+      for(int i = 2; i < numEachColor.length; i++) {
+         if (numEachColor[i] > numEachColor[maxNumColorIndex]) {
+            maxNumColorIndex = i;
+         }
+      }
+      if (maxNumColorIndex == 1) {
+         return CardColor.RED;
+      } else if (maxNumColorIndex == 2) {
+         return CardColor.BLUE;
+      } else if (maxNumColorIndex == 3) { 
+         return CardColor.GREEN;
+      } else {
+         return CardColor.YELLOW;
+      }
    }
 }

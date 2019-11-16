@@ -84,6 +84,10 @@ public class UnoHand {
       return cardCounts.keySet();
    }
    
+   public int[] numEachColor() {
+      return numEachColor;
+   }
+   
    // Prints out all the cards in the hand.
    public void printHand() {
       for (UnoCard card : cardCounts.keySet()) {
