@@ -7,6 +7,7 @@ import java.util.Random;
 public class UnoPlayer {
    private final int playerNumber;
    private final UnoHand hand;
+   // The action card type the player's is saving until they don't have any playable card
    private final CardType keepCardType;
 
    // Constructs an UnoPlayer with the given playerNumber, hand, and cardType
@@ -30,21 +31,29 @@ public class UnoPlayer {
       return this.hand;
    }
 
-   
+
+   // Returns the uno card the player will play based on the given card type of the discard card,
+   // color of the discard card, whether draw fours or draw twos are being stacked
    public UnoCard playCard(CardType discardType, CardColor discardColor,
                            boolean stackingDrawFour, boolean stackingDrawTwo) {
       Set<UnoCard> playableCards = new HashSet<UnoCard>();
 
+      // Go through all the unique cards to find all the playable cards
       for (UnoCard card : hand.uniqueCards()) {
          if (card.playableOn(discardType, discardColor, stackingDrawTwo, stackingDrawFour))  {
             playableCards.add(card);
          }
       }
+      // If there is no playable cards, return null
       if (playableCards.isEmpty()) {
          return null;
-      } else {
+      } else {  // If there is playable cards
+         // List of cards that are the same action card type as keepCardType
          List<UnoCard> sameKeepTypeCards = new LinkedList<UnoCard>();
+         // List of other playable cards that are not the same card type as keepCardType
          List<UnoCard> notSameKeepTypeCards = new LinkedList<UnoCard>();
+
+         // populate the sameKeepTypeCards and notSameKeepTypeCards list
          for (UnoCard card : playableCards) {
             if (card.sameTypeAs(keepCardType)) {
                sameKeepTypeCards.add(card);
@@ -52,11 +61,14 @@ public class UnoPlayer {
                notSameKeepTypeCards.add(card);
             }
          }
+
          Random rand = new Random();
+         // If there are only playble cards from the notSameKeepTypeCards list, play random card from notSameKeepTypeCards
          if (sameKeepTypeCards.isEmpty() || !notSameKeepTypeCards.isEmpty()) {
             int randIndex = rand.nextInt(notSameKeepTypeCards.size());
             return notSameKeepTypeCards.get(randIndex);
          } else {
+            // If there are playble cards from the sameKeepTypeCards list, play random card from sameKeepTypeCards
             int randIndex = rand.nextInt(sameKeepTypeCards.size());
             return sameKeepTypeCards.get(randIndex);
          }
