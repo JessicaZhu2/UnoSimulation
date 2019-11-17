@@ -75,7 +75,7 @@ public class UnoGame {
             break;
       }
 
-      
+      // while the game state is false, continue playing uno
       while (!gameState.win) {
          currentPlayer = playingOrder.peek();
          UnoCard newCard = currentPlayer.playCard(discardPileTop.getCardType(), discardColor,
@@ -113,6 +113,7 @@ public class UnoGame {
                   playingOrder.add(playingOrder.remove());
                   break;
                case WILDCARD:
+                  //Set discardColor to the player’s chosen color (choose the color that they have most cards of)
                   discardColor = currentPlayer.chooseColor();
                   playingOrder.add(playingOrder.remove());
                   break;
@@ -151,15 +152,22 @@ public class UnoGame {
       
       System.out.println("Winner: Player #" + gameState.playerWinner);
    }
-   
+
+   // Helper class that stores the state of the game
    private static class StateOfGame {
+      // The unique identifier of the winning player
       public int playerWinner;
+      // The total number of draws that player has to draw from the deck
       public int stackDrawValue;
+      // Whether the game has finished or not
       public boolean win;
       public boolean skip;
+      // Whether the top card on the discard pile is a draw two card played by the previous player
       public boolean stackingDrawTwo;
+      // Whether the top card on the discard pile is a draw four card played by the previous player
       public boolean stackingDrawFour;
-      
+
+      // Constructs the inital state of the game
       public StateOfGame() {
          playerWinner = 0;
          stackDrawValue = 0;
