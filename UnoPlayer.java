@@ -66,11 +66,15 @@ public class UnoPlayer {
          // If there are only playble cards from the notSameKeepTypeCards list, play random card from notSameKeepTypeCards
          if (sameKeepTypeCards.isEmpty() || !notSameKeepTypeCards.isEmpty()) {
             int randIndex = rand.nextInt(notSameKeepTypeCards.size());
-            return notSameKeepTypeCards.get(randIndex);
+            UnoCard cardToPlay = notSameKeepTypeCards.get(randIndex);
+            hand.playCard(cardToPlay);
+            return cardToPlay;
          } else {
             // If there are playble cards from the sameKeepTypeCards list, play random card from sameKeepTypeCards
             int randIndex = rand.nextInt(sameKeepTypeCards.size());
-            return sameKeepTypeCards.get(randIndex);
+            UnoCard cardToPlay = sameKeepTypeCards.get(randIndex);
+            hand.playCard(cardToPlay);
+            return cardToPlay;
          }
       }
    }

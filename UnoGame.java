@@ -141,12 +141,13 @@ public class UnoGame {
                   playingOrder.add(playingOrder.remove());
                   discardColor = discardPileTop.getCardColor();
                   break;
-               }
             }
-            // If currentPlayer has empty hand than that player is the winner
-            if (currentPlayer.hand().isEmpty()) {
+         }
+         
+         // If currentPlayer has empty hand than that player is the winner  
+         if (currentPlayer.hand().isEmpty()) {
             gameState.win = true;
-            gameState.playerWinner = currentPlayer.playerNumber();
+         gameState.playerWinner = currentPlayer.playerNumber();
          }
       }
       
