@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 public class UnoGame {
    public static final int NUM_PLAYERS = 4;
+   public static final CardType[] KEEP_TYPES = {CardType.WILDCARD, CardType.WILDCARD,
+                                                CardType.WILDCARD, CardType.WILDCARD};
    public static void main(String[] args) {
       UnoDeck dealingDeck = new UnoDeck();
       UnoDeck playingDeck = new UnoDeck();
@@ -19,7 +21,7 @@ public class UnoGame {
       for (int i = 0; i < NUM_PLAYERS; i++) {
          UnoHand hand = new UnoHand();
          hand.dealNewHand(dealingDeck);
-         UnoPlayer player = new UnoPlayer(i, hand, 12);
+         UnoPlayer player = new UnoPlayer(i, hand, KEEP_TYPES[i]);
          playingOrder.add(player);
       }
       
@@ -38,43 +40,45 @@ public class UnoGame {
          discardPileTop = dealingDeck.drawTopCard();
       }
       
+      UnoPlayer currentPlayer = playingOrder.peek();
+      CardColor discardColor;
+      
       switch (discardPileTop.getCardType()) {
-         case DRAW_FOUR_WILDCARD:
-            gameState.stackingDrawFour = true;
-            gameState.stackDrawValue += 4;
-            discardColor = currentPlayer.chooseColor();
-            playingOrder.add(playingOrder.remove());
-            break;
          case WILDCARD:
-            discardColor = currentPlayer.chooseColor();
             playingOrder.add(playingOrder.remove());
+            discardColor = currentPlayer.chooseColor();
             break;
          case DRAW_TWO:
+            playingOrder.add(playingOrder.remove());
             gameState.stackingDrawTwo = true;
             gameState.stackDrawValue += 2;
-            playingOrder.add(playingOrder.remove());
+            discardColor = discardPileTop.getCardColor();
             break;
          case REVERSE:
+            playingOrder.add(playingOrder.remove());
             while(!playingOrder.isEmpty()) {
                flipOrder.push(playingOrder.remove());
             }
             while(!flipOrder.isEmpty()) {
                playingOrder.add(flipOrder.pop());
             }
+            discardColor = discardPileTop.getCardColor();
             break;
          case SKIP:
             playingOrder.add(playingOrder.remove());
             playingOrder.add(playingOrder.remove());
+            discardColor = discardPileTop.getCardColor();
             break;
          default:
             playingOrder.add(playingOrder.remove());
+            discardColor = discardPileTop.getCardColor();
             break;
       }
 
       
       while (!gameState.win) {
-         UnoPlayer currentPlayer = playingOrder.peek();
-         UnoCard newCard = currentPlayer.playCard(discardPileTop,
+         currentPlayer = playingOrder.peek();
+         UnoCard newCard = currentPlayer.playCard(discardPileTop.getCardType(), discardColor,
                                                   gameState.stackingDrawTwo,
                                                   gameState.stackingDrawTwo);
 
@@ -117,6 +121,7 @@ public class UnoGame {
                   gameState.stackingDrawTwo = true;
                   gameState.stackDrawValue += 2;
                   playingOrder.add(playingOrder.remove());
+                  discardColor = discardPileTop.getCardColor();
                   break;
                case REVERSE:
                   while(!playingOrder.isEmpty()) {
@@ -125,13 +130,16 @@ public class UnoGame {
                   while(!flipOrder.isEmpty()) {
                      playingOrder.add(flipOrder.pop());
                   }
+                  discardColor = discardPileTop.getCardColor();
                   break;
                case SKIP:
                   playingOrder.add(playingOrder.remove());
                   playingOrder.add(playingOrder.remove());
+                  discardColor = getCardColor(discardPileTop);
                   break;
                default:
                   playingOrder.add(playingOrder.remove());
+                  discardColor = getCardColor(discardPileTop);
                   break;
                }
             }
