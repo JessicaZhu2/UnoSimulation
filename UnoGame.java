@@ -105,11 +105,10 @@ public class UnoGame {
             // the top of the discard pile
             discardPileTop = newCard;
             switch (discardPileTop.getCardType()) {
-               // Increment stack draw value by 4
-               //Set discardColor to the player’s chosen color  (choose the color that they have most cards of)
                case DRAW_FOUR_WILDCARD:
                   gameState.stackingDrawFour = true;
                   gameState.stackDrawValue += 4;
+                  //Set discardColor to the player’s chosen color (choose the color that they have most cards of)
                   discardColor = currentPlayer.chooseColor();
                   playingOrder.add(playingOrder.remove());
                   break;
