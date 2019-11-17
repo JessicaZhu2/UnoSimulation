@@ -99,7 +99,7 @@ public class UnoPlayer {
       }
       Random rand = new Random();
       
-      int maxNumColorIndex = (rand.nextInt(maxNumColorIndexes.size()));
+      int maxNumColorIndex = maxNumColorIndexes.get(rand.nextInt(maxNumColorIndexes.size()));
       if (maxNumColorIndex == 1) {
          return CardColor.RED;
       } else if (maxNumColorIndex == 2) {
