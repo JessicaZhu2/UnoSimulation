@@ -44,18 +44,18 @@ public class UnoPlayer {
          return null;
       } else {
          List<UnoCard> sameKeepTypeCards = new LinkedList<UnoCard>();
-         List<UnoCard> notSameTypeCards = new LinkedList<UnoCard>();
+         List<UnoCard> notSameKeepTypeCards = new LinkedList<UnoCard>();
          for (UnoCard card : playableCards) {
             if (card.sameTypeAs(keepCardType)) {
                sameKeepTypeCards.add(card);
             } else {
-               notSameTypeCards.add(card);
+               notSameKeepTypeCards.add(card);
             }
          }
          Random rand = new Random();
-         if (sameKeepTypeCards.isEmpty() || !notSameTypeCards.isEmpty()) {
-            int randIndex = rand.nextInt(notSameTypeCards.size());
-            return notSameTypeCards.get(randIndex);
+         if (sameKeepTypeCards.isEmpty() || !notSameKeepTypeCards.isEmpty()) {
+            int randIndex = rand.nextInt(notSameKeepTypeCards.size());
+            return notSameKeepTypeCards.get(randIndex);
          } else {
             int randIndex = rand.nextInt(sameKeepTypeCards.size());
             return sameKeepTypeCards.get(randIndex);
