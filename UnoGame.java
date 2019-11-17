@@ -75,11 +75,8 @@ public class UnoGame {
             discardColor = discardPileTop.getCardColor();
             break;
       }
-
-<<<<<<< HEAD
+      
       // while the game state is false, continue playing uno
-=======
->>>>>>> fa379dae37e78fdbbec1d8dc984162b8decef6f6
       while (!gameState.win) {
          System.out.println("Current Player: " + currentPlayer.playerNumber());
          currentPlayer.hand().printHand();
