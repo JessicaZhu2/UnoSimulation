@@ -74,16 +74,21 @@ public class UnoPlayer {
          }
       }
    }
-   
+
+   // Return the card color that they player has the most color of
+   // When a player plays a wildcard, it chooses the color that they have the most color of
+   // If there is equal amount of card per color, choose random color out of the colors they currently have
    public CardColor chooseColor() {
       // IMPLEMENT SWITCHING TO GREATEST NUMBER NONWILDCARD COLOR AND RAND COLOR IF LAST CARD OR TIED
       int[] numEachColor = hand.numEachColor();
       int maxNumColorIndex = 1;
+      // loop through each color to find the index of the color the player has the most color of
       for(int i = 2; i < numEachColor.length; i++) {
          if (numEachColor[i] > numEachColor[maxNumColorIndex]) {
             maxNumColorIndex = i;
          }
       }
+      //
       if (maxNumColorIndex == 1) {
          return CardColor.RED;
       } else if (maxNumColorIndex == 2) {
