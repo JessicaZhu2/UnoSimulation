@@ -135,11 +135,11 @@ public class UnoGame {
                case SKIP:
                   playingOrder.add(playingOrder.remove());
                   playingOrder.add(playingOrder.remove());
-                  discardColor = getCardColor(discardPileTop);
+                  discardColor = discardPileTop.getCardColor();
                   break;
                default:
                   playingOrder.add(playingOrder.remove());
-                  discardColor = getCardColor(discardPileTop);
+                  discardColor = discardPileTop.getCardColor();
                   break;
                }
             }
