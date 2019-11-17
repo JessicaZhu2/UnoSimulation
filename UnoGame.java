@@ -21,7 +21,7 @@ public class UnoGame {
       for (int i = 0; i < NUM_PLAYERS; i++) {
          UnoHand hand = new UnoHand();
          hand.dealNewHand(dealingDeck);
-         UnoPlayer player = new UnoPlayer(i, hand, KEEP_TYPES[i]);
+         UnoPlayer player = new UnoPlayer(i+1, hand, KEEP_TYPES[i]);
          playingOrder.add(player);
       }
       
@@ -143,7 +143,6 @@ public class UnoGame {
                   break;
             }
          }
-         
          // If currentPlayer has empty hand than that player is the winner  
          if (currentPlayer.hand().isEmpty()) {
             gameState.win = true;

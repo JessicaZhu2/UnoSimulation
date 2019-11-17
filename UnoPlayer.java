@@ -85,14 +85,21 @@ public class UnoPlayer {
    public CardColor chooseColor() {
       // IMPLEMENT SWITCHING TO GREATEST NUMBER NONWILDCARD COLOR AND RAND COLOR IF LAST CARD OR TIED
       int[] numEachColor = hand.numEachColor();
-      int maxNumColorIndex = 1;
+      List<Integer> maxNumColorIndexes = new LinkedList<Integer>();
+      maxNumColorIndexes.add(1);
+     
       // loop through each color to find the index of the color the player has the most color of
-      for(int i = 2; i < numEachColor.length; i++) {
-         if (numEachColor[i] > numEachColor[maxNumColorIndex]) {
-            maxNumColorIndex = i;
+      for (int i = 2; i < numEachColor.length; i++) {
+         if (numEachColor[i] == numEachColor[maxNumColorIndexes.get(0)]) {
+            maxNumColorIndexes.add(i);
+         } else if (numEachColor[i] > numEachColor[maxNumColorIndexes.get(0)]) {
+            maxNumColorIndexes.clear();
+            maxNumColorIndexes.add(i);
          }
       }
-      //
+      Random rand = new Random();
+      
+      int maxNumColorIndex = (rand.nextInt(maxNumColorIndexes.size()));
       if (maxNumColorIndex == 1) {
          return CardColor.RED;
       } else if (maxNumColorIndex == 2) {
