@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b2626d4-0adb-4837-84e8-1fcd2ee18bea" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/UnoGame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/UnoGame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnoGame$StateOfGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/UnoGame$StateOfGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnoGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/UnoGame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UnoGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnoPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/UnoPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnoPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnoHand.class" beforeDir="false" afterPath="$PROJECT_DIR$/UnoHand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UnoHand.java" beforeDir="false" afterPath="$PROJECT_DIR$/UnoHand.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,8 +68,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UnoGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="169" column="48" selection-start-line="169" selection-start-column="48" selection-end-line="169" selection-end-column="48" />
+            <state relative-caret-position="291">
+              <caret line="172" selection-start-line="172" selection-end-line="172" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -288,8 +291,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/UnoGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="169" column="48" selection-start-line="169" selection-start-column="48" selection-end-line="169" selection-end-column="48" />
+        <state relative-caret-position="291">
+          <caret line="172" selection-start-line="172" selection-end-line="172" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

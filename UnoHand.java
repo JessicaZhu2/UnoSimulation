@@ -93,7 +93,8 @@ public class UnoHand {
       for (UnoCard card : cardCounts.keySet()) {
           int numcards = cardCounts.get(card);
           for (int i = 0; i < numcards; i++) {
-            System.out.println(card.toString() + " | " + cardCounts.get(card));
+            // System.out.println(card.toString() + " | " + cardCounts.get(card));
+            System.out.println(card.toString());
           }
       }
       System.out.println("++===++");

@@ -40,6 +40,7 @@ public class UnoGame {
          discardPileTop = dealingDeck.drawTopCard();
       }
       
+      
       UnoPlayer currentPlayer = playingOrder.peek();
       CardColor discardColor;
       
@@ -75,8 +76,16 @@ public class UnoGame {
             break;
       }
 
+<<<<<<< HEAD
       // while the game state is false, continue playing uno
+=======
+>>>>>>> fa379dae37e78fdbbec1d8dc984162b8decef6f6
       while (!gameState.win) {
+         System.out.println("Current Player: " + currentPlayer.playerNumber());
+         currentPlayer.hand().printHand();
+         System.out.println("Discard Pile Top: " + discardPileTop.toString());
+         System.out.println("Current Color: " + discardColor.toString());
+         
          currentPlayer = playingOrder.peek();
          UnoCard newCard = currentPlayer.playCard(discardPileTop.getCardType(), discardColor,
                                                   gameState.stackingDrawTwo,
@@ -161,7 +170,6 @@ public class UnoGame {
       public int stackDrawValue;
       // Whether the game has finished or not
       public boolean win;
-      public boolean skip;
       // Whether the top card on the discard pile is a draw two card played by the previous player
       public boolean stackingDrawTwo;
       // Whether the top card on the discard pile is a draw four card played by the previous player
