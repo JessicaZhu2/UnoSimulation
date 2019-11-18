@@ -34,26 +34,35 @@ public class UnoPlayer {
 
    // Returns the uno card the player will play based on the given card type of the discard card,
    // color of the discard card, whether draw fours or draw twos are being stacked
+   // If there is no playable card, then return null
    public UnoCard playCard(CardType discardType, CardColor discardColor,
                            boolean stackingDrawFour, boolean stackingDrawTwo) {
       Set<UnoCard> playableCards = new HashSet<UnoCard>();
+      // If the top card on discard pile is a draw four card and player has a draw four card in their hand
+      // player will stack the draw four card
       if (stackingDrawFour) {
          UnoCard drawFourWildcard = new UnoCard(CardColor.NONE, CardType.DRAW_FOUR_WILDCARD);
          if (hand.uniqueCards().contains(drawFourWildcard)) {
             hand.playCard(drawFourWildcard);
             return drawFourWildcard; 
-         } else {
+         } else {       // Otherwise return null
             return null; 
          }
+         // If the top card on the discard pile is a draw two card and player has a draw two card in their hand
+         // player will stack the it with a draw two card they have most colors of
+         // Follows the assumption that the player will choose color that they have the most cards
+         // If the player has equal amounts of draw two card for each color, it will play a random draw two card
       } else if (stackingDrawTwo) {
          for (UnoCard card : hand.uniqueCards()) {
             if (card.sameTypeAs(CardType.DRAW_TWO))  {
                playableCards.add(card);
             }
          }
+         // Otherwise return null, if there is no playable card
          if (playableCards.isEmpty()) {
             return null;
          } else {
+            // Find the draw two card that the player has the most color of
             UnoCard mostColorsPlusTwos = null;
             int[] numEachColor = hand.numEachColor();
             List<Integer> maxNumColorIndexes = new LinkedList<Integer>();
@@ -62,20 +71,24 @@ public class UnoPlayer {
                if (maxNumColorIndexes.isEmpty()) {
                   maxNumColorIndexes.add(numColor);
                } else {
+                  // If player has equal amounts of draw two cards for each color, add it to the maxNumColorIndexes
                   if (numEachColor[numColor] == numEachColor[maxNumColorIndexes.get(0)]) {
                      maxNumColorIndexes.add(numColor);
+                     // If player has more draw two cards for a specific color, clear the maxNumColorIndexes list
+                     // and add numColor index to maxNumColorIndexes
                   } else if (numEachColor[numColor] > numEachColor[maxNumColorIndexes.get(0)]) {
                      maxNumColorIndexes.clear();
                      maxNumColorIndexes.add(numColor);
                   }
                }
-            } 
+            }
+            // Randominize which color is chosen
             Random rand = new Random();
             int randomNum = rand.nextInt(maxNumColorIndexes.size());
             int maxNumRandomColorIndex = maxNumColorIndexes.get(randomNum);
                
             CardColor randMostColors = CardColor.NONE;
-            
+
             if (maxNumRandomColorIndex == 1) {
                randMostColors = CardColor.RED;
             } else if (maxNumRandomColorIndex == 2) {
@@ -85,7 +98,7 @@ public class UnoPlayer {
             } else {
                randMostColors = CardColor.YELLOW;
             }
-            
+            // draw two card that is played of randMostColors
             UnoCard cardToPlay = new UnoCard(randMostColors, CardType.DRAW_TWO);
             hand.playCard(cardToPlay);
             return cardToPlay;
