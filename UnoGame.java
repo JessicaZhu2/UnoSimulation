@@ -80,9 +80,9 @@ public class UnoGame {
       while (!gameState.win) {
          System.out.println("++===++");
          System.out.println("Current Player: " + currentPlayer.playerNumber());
-         System.out.println("\\\\\\\\\\\");
+         System.out.println("///////////");
          currentPlayer.hand().printHand();
-         System.out.println("\\\\\\\\\\\");
+         System.out.println("///////////");
          System.out.println("Discard Pile Top: " + discardPileTop.toString());
          System.out.println("Current Color: " + discardColor.toString());
          
