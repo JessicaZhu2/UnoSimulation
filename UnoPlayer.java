@@ -37,44 +37,78 @@ public class UnoPlayer {
    public UnoCard playCard(CardType discardType, CardColor discardColor,
                            boolean stackingDrawFour, boolean stackingDrawTwo) {
       Set<UnoCard> playableCards = new HashSet<UnoCard>();
-
-      // Go through all the unique cards to find all the playable cards
-      for (UnoCard card : hand.uniqueCards()) {
-         if (card.playableOn(discardType, discardColor, stackingDrawTwo, stackingDrawFour))  {
-            playableCards.add(card);
+      if (stackingDrawFour) {
+         UnoCard drawFourWildcard = new UnoCard(CardColor.NONE, CardType.DRAW_FOUR_WILDCARD);
+         if (hand.uniqueCards().contains(drawFourWildcard)) {
+            hand.playCard(drawFourWildcard);
+            return drawFourWildcard; 
+         } else {
+            return null; 
          }
-      }
-      // If there is no playable cards, return null
-      if (playableCards.isEmpty()) {
-         return null;
-      } else {  // If there is playable cards
-         // List of cards that are the same action card type as keepCardType
-         List<UnoCard> sameKeepTypeCards = new LinkedList<UnoCard>();
-         // List of other playable cards that are not the same card type as keepCardType
-         List<UnoCard> notSameKeepTypeCards = new LinkedList<UnoCard>();
-
-         // populate the sameKeepTypeCards and notSameKeepTypeCards list
-         for (UnoCard card : playableCards) {
-            if (card.sameTypeAs(keepCardType)) {
-               sameKeepTypeCards.add(card);
+      } else if (stackingDrawTwo) {
+         for (UnoCard card : hand.uniqueCards()) {
+            if (card.sameTypeAs(CardType.DRAW_TWO))  {
+               playableCards.add(card);
+            }
+            if (playableCards.isEmpty()) {
+               return null;
             } else {
-               notSameKeepTypeCards.add(card);
+               UnoCard mostColorsCard = playableCards.get(0);
+               int[] numEachColor = hand.numEachColor();
+               List<Integer> maxNumColorIndexes = new LinkedList<Integer>();
+               maxNumColorIndexes.add(1);
+
+               for (i = 2; i < numEachColor.length; i++) {
+                  if (numEachColor[i] == numEachColor[maxNumColorIndexes.get(0)]) {
+                     maxNumColorIndexes.add(i);
+                  } else if (numEachColor[i] > numEachColor[maxNumColorIndexes.get(0)]) {
+                     maxNumColorIndexes.clear();
+                     maxNumColorIndexes.add(i);
+                  }
+               } 
+               hand.playCard(mostColorsCard);
+               return mostColorsCard
             }
          }
-
-         Random rand = new Random();
-         // If there are only playble cards from the notSameKeepTypeCards list, play random card from notSameKeepTypeCards
-         if (sameKeepTypeCards.isEmpty() || !notSameKeepTypeCards.isEmpty()) {
-            int randIndex = rand.nextInt(notSameKeepTypeCards.size());
-            UnoCard cardToPlay = notSameKeepTypeCards.get(randIndex);
-            hand.playCard(cardToPlay);
-            return cardToPlay;
-         } else {
-            // If there are playble cards from the sameKeepTypeCards list, play random card from sameKeepTypeCards
-            int randIndex = rand.nextInt(sameKeepTypeCards.size());
-            UnoCard cardToPlay = sameKeepTypeCards.get(randIndex);
-            hand.playCard(cardToPlay);
-            return cardToPlay;
+      } else {
+         // Go through all the unique cards to find all the playable cards
+         for (UnoCard card : hand.uniqueCards()) {
+            if (card.playableOn(discardType, discardColor, stackingDrawTwo, stackingDrawFour))  {
+               playableCards.add(card);
+            }
+         }
+         // If there is no playable cards, return null
+         if (playableCards.isEmpty()) {
+            return null;
+         } else {  // If there is playable cards
+            // List of cards that are the same action card type as keepCardType
+            List<UnoCard> sameKeepTypeCards = new LinkedList<UnoCard>();
+            // List of other playable cards that are not the same card type as keepCardType
+            List<UnoCard> notSameKeepTypeCards = new LinkedList<UnoCard>();
+      
+            // populate the sameKeepTypeCards and notSameKeepTypeCards list
+            for (UnoCard card : playableCards) {
+               if (card.sameTypeAs(keepCardType)) {
+                  sameKeepTypeCards.add(card);
+               } else {
+                  notSameKeepTypeCards.add(card);
+               }
+            }
+      
+            Random rand = new Random();
+            // If there are only playble cards from the notSameKeepTypeCards list, play random card from notSameKeepTypeCards
+            if (sameKeepTypeCards.isEmpty() || !notSameKeepTypeCards.isEmpty()) {
+               int randIndex = rand.nextInt(notSameKeepTypeCards.size());
+               UnoCard cardToPlay = notSameKeepTypeCards.get(randIndex);
+               hand.playCard(cardToPlay);
+               return cardToPlay;
+            } else {
+               // If there are playble cards from the sameKeepTypeCards list, play random card from sameKeepTypeCards
+               int randIndex = rand.nextInt(sameKeepTypeCards.size());
+               UnoCard cardToPlay = sameKeepTypeCards.get(randIndex);
+               hand.playCard(cardToPlay);
+               return cardToPlay;
+            }
          }
       }
    }

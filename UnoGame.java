@@ -78,6 +78,8 @@ public class UnoGame {
       
       // while the game state is false, continue playing uno
       while (!gameState.win) {
+         currentPlayer = playingOrder.peek();
+         
          System.out.println("++===++");
          System.out.println("Current Player: " + currentPlayer.playerNumber());
          System.out.println("///////////");
@@ -85,17 +87,17 @@ public class UnoGame {
          System.out.println("///////////");
          System.out.println("Discard Pile Top: " + discardPileTop.toString());
          System.out.println("Current Color: " + discardColor.toString());
-         
-         currentPlayer = playingOrder.peek();
          UnoCard newCard = currentPlayer.playCard(discardPileTop.getCardType(), discardColor,
-                                                  gameState.stackingDrawTwo,
+                                                  gameState.stackingDrawFour,
                                                   gameState.stackingDrawTwo);
 
          //If newCard is null, then player has no playable cards in their hand
          if (newCard == null) {
-            //If current played card is a draw two or draw four card, then player has to draw ‘stackDrawValue’
-            // number of cards
+            // If current played card is a draw two or draw four card, then player
+            // has to draw ‘stackDrawValue’ number of cards
             if (gameState.stackingDrawTwo || gameState.stackingDrawFour) {
+               System.out.println("Player " + currentPlayer.playerNumber() + " draws "
+                                 + gameState.stackDrawValue + " cards");
                for (int i = 0; i < gameState.stackDrawValue; i++) {
                   UnoCard drawnCard = playingDeck.copyRandomCard();
                   currentPlayer.hand().addCard(drawnCard);
@@ -105,11 +107,14 @@ public class UnoGame {
                gameState.stackDrawValue = 0;
             // If not a draw two or draw four card, then player just draw one card from playing Deck
             } else {
+               System.out.println("Player " + currentPlayer.playerNumber() + " draws a card");
                UnoCard drawnCard = playingDeck.copyRandomCard();
                currentPlayer.hand().addCard(drawnCard);
             }
             playingOrder.add(playingOrder.remove());
          } else {
+            System.out.println("Player " + currentPlayer.playerNumber() + " plays a " + newCard.toString());
+
             // If player has playable card in their hand, then perform action based on the type of card on
             // the top of the discard pile
             discardPileTop = newCard;
@@ -151,12 +156,14 @@ public class UnoGame {
                   discardColor = discardPileTop.getCardColor();
                   break;
             }
+            System.out.println("New color: " + discardColor.toString());
          }
          // If currentPlayer has empty hand than that player is the winner  
          if (currentPlayer.hand().isEmpty()) {
             gameState.win = true;
          gameState.playerWinner = currentPlayer.playerNumber();
          }
+         System.out.println("++===++");
       }
       
       System.out.println("Winner: Player #" + gameState.playerWinner);
