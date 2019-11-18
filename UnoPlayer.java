@@ -50,25 +50,45 @@ public class UnoPlayer {
             if (card.sameTypeAs(CardType.DRAW_TWO))  {
                playableCards.add(card);
             }
-            if (playableCards.isEmpty()) {
-               return null;
-            } else {
-               UnoCard mostColorsCard = playableCards.get(0);
-               int[] numEachColor = hand.numEachColor();
-               List<Integer> maxNumColorIndexes = new LinkedList<Integer>();
-               maxNumColorIndexes.add(1);
-
-               for (i = 2; i < numEachColor.length; i++) {
-                  if (numEachColor[i] == numEachColor[maxNumColorIndexes.get(0)]) {
-                     maxNumColorIndexes.add(i);
-                  } else if (numEachColor[i] > numEachColor[maxNumColorIndexes.get(0)]) {
+         }
+         if (playableCards.isEmpty()) {
+            return null;
+         } else {
+            UnoCard mostColorsPlusTwos = null;
+            int[] numEachColor = hand.numEachColor();
+            List<Integer> maxNumColorIndexes = new LinkedList<Integer>();
+            for (UnoCard playableCard : playableCards) {
+               int numColor = playableCard.getCardColor().getNumColor();
+               if (maxNumColorIndexes.isEmpty()) {
+                  maxNumColorIndexes.add(numColor);
+               } else {
+                  if (numEachColor[numColor] == numEachColor[maxNumColorIndexes.get(0)]) {
+                     maxNumColorIndexes.add(numColor);
+                  } else if (numEachColor[numColor] > numEachColor[maxNumColorIndexes.get(0)]) {
                      maxNumColorIndexes.clear();
-                     maxNumColorIndexes.add(i);
+                     maxNumColorIndexes.add(numColor);
                   }
-               } 
-               hand.playCard(mostColorsCard);
-               return mostColorsCard
+               }
+            } 
+            Random rand = new Random();
+            int randomNum = rand.nextInt(maxNumColorIndexes.size());
+            int maxNumRandomColorIndex = maxNumColorIndexes.get(randomNum);
+               
+            CardColor randMostColors = CardColor.NONE;
+            
+            if (maxNumRandomColorIndex == 1) {
+               randMostColors = CardColor.RED;
+            } else if (maxNumRandomColorIndex == 2) {
+               randMostColors = CardColor.BLUE;
+            } else if (maxNumRandomColorIndex == 3) { 
+               randMostColors = CardColor.GREEN;
+            } else {
+               randMostColors = CardColor.YELLOW;
             }
+            
+            UnoCard cardToPlay = new UnoCard(randMostColors, CardType.DRAW_TWO);
+            hand.playCard(cardToPlay);
+            return cardToPlay;
          }
       } else {
          // Go through all the unique cards to find all the playable cards
@@ -132,10 +152,9 @@ public class UnoPlayer {
          }
       }
       Random rand = new Random();
-      
       int randomColor = rand.nextInt(maxNumColorIndexes.size());
-      
       int maxNumColorIndex = maxNumColorIndexes.get(randomColor);
+      
       if (maxNumColorIndex == 1) {
          return CardColor.RED;
       } else if (maxNumColorIndex == 2) {
