@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class UnoGame {
    public static final int NUM_PLAYERS = 4;
-   public static final CardType[] KEEP_TYPES = {CardType.WILDCARD, CardType.WILDCARD,
-                                                CardType.WILDCARD, CardType.WILDCARD};
+   public static final CardType[] KEEP_TYPES = {CardType.REVERSE, CardType.REVERSE,
+                                                CardType.REVERSE, CardType.REVERSE};
    public static final int NUM_ROUNDS = 1000000;
    public static final long SEED = 123456789;
    public static void main(String[] args) {
