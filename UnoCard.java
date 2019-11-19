@@ -68,9 +68,9 @@ public class UnoCard {
    public boolean playableOn(CardType currentType, CardColor currentColor,
                              boolean stackingDrawTwo, boolean stackingDrawFour) {
       if (stackingDrawTwo) {
-         return currentType.getNumType() == 12;
+         return currentType == CardType.DRAW_TWO;
       } else if (stackingDrawFour) {
-         return currentType.getNumType() == 14;
+         return currentType == CardType.DRAW_FOUR_WILDCARD;
       } else {
          return (this.isWildcard() || this.sameTypeAs(currentType) ||
                  this.sameColorAs(currentColor));

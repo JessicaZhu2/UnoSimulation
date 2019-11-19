@@ -23,10 +23,10 @@ public enum CardColor {
    // Returns a string with the name of the card color
    public String toString() {
       switch (this) {
-         case RED: return "RED ";
-         case BLUE: return "BLUE ";
-         case GREEN: return "GREEN ";
-         case YELLOW: return "YELLOW ";
+         case RED: return "Red ";
+         case BLUE: return "Blue ";
+         case GREEN: return "Green ";
+         case YELLOW: return "Yellow ";
          case NONE: return "";
          default: throw new IllegalStateException("Invalid color");
       }

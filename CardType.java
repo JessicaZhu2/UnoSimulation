@@ -1,5 +1,4 @@
 // All possible standard types of Uno cards
-
 public enum CardType {
    ZERO               (0),
    ONE                (1),
