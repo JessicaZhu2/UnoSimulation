@@ -15,16 +15,18 @@ public class UnoDeck {
 //    - 2 reverses of every color
 //    - 4 wildcards
 //    - 4 draw four wildcards
+// Parameter:
+//    random = the Random object to use for generating random numbers
    public UnoDeck(Random random) {
       rand = random;
       deck = new ArrayList<UnoCard>();
-      for (CardType type : CardType.values()) {
-         for (CardColor color : CardColor.values()) {
-            if (color.getNumColor() != 0) {
-               if (type.getNumType() == 0) {
-                  deck.add(new UnoCard(color, type));
-               } else if (type.getNumType() < 13) {
-                  for (int i = 0; i < 2; i++) {
+      for (CardType type : CardType.values()) { // for each Uno card type
+         for (CardColor color : CardColor.values()) { // for each Uno card  color
+            if (color.getNumColor() != 0) { // if not a wildcard type
+               if (type.getNumType() == 0) { // if card is the zero card
+                  deck.add(new UnoCard(color, type)); // add one
+               } else { // otherwise
+                  for (int i = 0; i < 2; i++) { // add two of this card with this type and c 
                      deck.add(new UnoCard(color, type));
                   }
                }
