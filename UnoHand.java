@@ -1,5 +1,5 @@
 import java.util.Map;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Set;
 
 // Represents a hand of Uno Card.
@@ -12,7 +12,7 @@ public class UnoHand {
    public UnoHand() {
       numEachType = new int[15];
       numEachColor = new int[5];
-      cardCounts = new HashMap<UnoCard, Integer>();
+      cardCounts = new TreeMap<UnoCard, Integer>();
    } 
    
    // Deals a new starting hand of 7 cards from an UnoDeck.

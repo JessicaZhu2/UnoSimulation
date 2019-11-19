@@ -1,5 +1,5 @@
 // Represents an standard Uno card
-public class UnoCard {
+public class UnoCard implements Comparable<UnoCard> {
    private final CardType type;
    private final CardColor color;
    
@@ -77,8 +77,19 @@ public class UnoCard {
       }
    }
    
+   @Override
+   public int compareTo(UnoCard other) {
+      if (this.type.getNumType() != other.type.getNumType()) {
+         return this.type.getNumType() - other.type.getNumType();
+      } else if (this.color.getNumColor() != other.color.getNumColor()) {
+         return this.color.getNumColor() - other.color.getNumColor();
+      } else { 
+         return 0;
+      }
+   }
+   
    // Returns true/false for whether the other object is the same as the UnoCard.
-   // Parameters:
+   // Parameters:t
    //    other - other object to compare to this instance of UnoCard
    @Override
    public boolean equals(Object other) {

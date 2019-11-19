@@ -8,7 +8,7 @@ public class UnoGame {
    public static final int NUM_PLAYERS = 4;
    public static final CardType[] KEEP_TYPES = {CardType.REVERSE, CardType.REVERSE,
                                                 CardType.REVERSE, CardType.REVERSE};
-   public static final int NUM_ROUNDS = 1000000;
+   public static final int NUM_ROUNDS = 1;
    public static final long SEED = 123456789;
    public static void main(String[] args) {
       int[] winCounts = {0,0,0,0};
@@ -20,7 +20,7 @@ public class UnoGame {
          // playingDeck.printDeck();
    
          dealingDeck.shuffle();
-         //dealingDeck.printDeck();
+         // dealingDeck.printDeck();
          
          Queue<UnoPlayer> playingOrder = new LinkedList<UnoPlayer>();
          Stack<UnoPlayer> flipOrder = new Stack<UnoPlayer>();
@@ -87,13 +87,13 @@ public class UnoGame {
          while (!gameState.win) {
             currentPlayer = playingOrder.peek();
             
-            //System.out.println("++===++");
-            //System.out.println("Current Player: " + currentPlayer.playerNumber());
-            //System.out.println("///////////");
-            //currentPlayer.hand().printHand();
-            //System.out.println("///////////");
-            //System.out.println("Discard Pile Top: " + discardPileTop.toString());
-            //System.out.println("Current Color: " + discardColor.toString());
+            System.out.println("++===++");
+            System.out.println("Current Player: " + currentPlayer.playerNumber());
+            System.out.println("///////////");
+            currentPlayer.hand().printHand();
+            System.out.println("///////////");
+            System.out.println("Discard Pile Top: " + discardPileTop.toString());
+            System.out.println("Current Color: " + discardColor.toString());
             UnoCard newCard = currentPlayer.playCard(discardPileTop.getCardType(), discardColor,
                                                      gameState.stackingDrawFour,
                                                      gameState.stackingDrawTwo);
@@ -103,8 +103,8 @@ public class UnoGame {
                // If current played card is a draw two or draw four card, then player
                // has to draw ‘stackDrawValue’ number of cards
                if (gameState.stackingDrawTwo || gameState.stackingDrawFour) {
-                  //System.out.println("Player " + currentPlayer.playerNumber() + " draws "
-                  //                   + gameState.stackDrawValue + " cards");
+                  System.out.println("Player " + currentPlayer.playerNumber() + " draws "
+                                     + gameState.stackDrawValue + " cards");
                   for (int i = 0; i < gameState.stackDrawValue; i++) {
                      UnoCard drawnCard = playingDeck.copyRandomCard();
                      currentPlayer.hand().addCard(drawnCard);
@@ -114,13 +114,13 @@ public class UnoGame {
                   gameState.stackDrawValue = 0;
                // If not a draw two or draw four card, then player just draw one card from playing Deck
                } else {
-                  //System.out.println("Player " + currentPlayer.playerNumber() + " draws a card");
+                  System.out.println("Player " + currentPlayer.playerNumber() + " draws a card");
                   UnoCard drawnCard = playingDeck.copyRandomCard();
                   currentPlayer.hand().addCard(drawnCard);
                }
                playingOrder.add(playingOrder.remove());
             } else {
-               //System.out.println("Player " + currentPlayer.playerNumber() + " plays a " + newCard.toString());
+               System.out.println("Player " + currentPlayer.playerNumber() + " plays a " + newCard.toString());
    
                // If player has playable card in their hand, player plays card on top of discard pile then performs
                // action based on the type of card on the top of the discard pile
@@ -163,16 +163,16 @@ public class UnoGame {
                      discardColor = discardPileTop.getCardColor();
                      break;
                }
-               //System.out.println("New color: " + discardColor.toString());
+               System.out.println("New color: " + discardColor.toString());
             }
             // If currentPlayer has empty hand than that player is the winner  
             if (currentPlayer.hand().isEmpty()) {
                gameState.win = true;
             gameState.playerWinner = currentPlayer.playerNumber();
             }
-            //System.out.println("++===++");
+            System.out.println("++===++");
          }
-         //System.out.println("Winner: Player #" + gameState.playerWinner);
+         System.out.println("Winner: Player #" + gameState.playerWinner);
          winCounts[gameState.playerWinner - 1]++;
       }
       System.out.println(Arrays.toString(winCounts));

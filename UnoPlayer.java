@@ -1,4 +1,4 @@
-import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.Set;
 import java.util.List;
 import java.util.LinkedList;
@@ -39,7 +39,7 @@ public class UnoPlayer {
    // If there is no playable card, then return null
    public UnoCard playCard(CardType discardType, CardColor discardColor,
                            boolean stackingDrawFour, boolean stackingDrawTwo) {
-      Set<UnoCard> playableCards = new HashSet<UnoCard>();
+      Set<UnoCard> playableCards = new TreeSet<UnoCard>();
       // If the top card on discard pile is a draw four card and player has a draw four card in their hand
       // player will stack the draw four card
       if (stackingDrawFour) {
