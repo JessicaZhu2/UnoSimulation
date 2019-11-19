@@ -2,22 +2,25 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.LinkedList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class UnoGame {
    public static final int NUM_PLAYERS = 4;
    public static final CardType[] KEEP_TYPES = {CardType.WILDCARD, CardType.WILDCARD,
                                                 CardType.WILDCARD, CardType.WILDCARD};
    public static final int NUM_ROUNDS = 1000000;
+   public static final long SEED = 123456789;
    public static void main(String[] args) {
       int[] winCounts = {0,0,0,0};
+      Random rand = new Random(SEED);
       for (int n = 0; n < NUM_ROUNDS; n++) { 
-         UnoDeck dealingDeck = new UnoDeck();
-         UnoDeck playingDeck = new UnoDeck();
+         UnoDeck dealingDeck = new UnoDeck(rand);
+         UnoDeck playingDeck = new UnoDeck(rand);
          StateOfGame gameState = new StateOfGame();
          // playingDeck.printDeck();
    
          dealingDeck.shuffle();
-         // dealingDeck.printDeck();
+         //dealingDeck.printDeck();
          
          Queue<UnoPlayer> playingOrder = new LinkedList<UnoPlayer>();
          Stack<UnoPlayer> flipOrder = new Stack<UnoPlayer>();
@@ -25,7 +28,7 @@ public class UnoGame {
          for (int i = 0; i < NUM_PLAYERS; i++) {
             UnoHand hand = new UnoHand();
             hand.dealNewHand(dealingDeck);
-            UnoPlayer player = new UnoPlayer(i+1, hand, KEEP_TYPES[i]);
+            UnoPlayer player = new UnoPlayer(i+1, hand, KEEP_TYPES[i], rand);
             playingOrder.add(player);
          }
          

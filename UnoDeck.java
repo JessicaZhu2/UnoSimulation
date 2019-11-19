@@ -15,8 +15,8 @@ public class UnoDeck {
 //    - 2 reverses of every color
 //    - 4 wildcards
 //    - 4 draw four wildcards
-   public UnoDeck() {
-      rand = new Random();
+   public UnoDeck(Random random) {
+      rand = random;
       deck = new ArrayList<UnoCard>();
       for (CardType type : CardType.values()) {
          for (CardColor color : CardColor.values()) {

@@ -9,16 +9,18 @@ public class UnoPlayer {
    private final UnoHand hand;
    // The action card type the player's is saving until they don't have any playable card
    private final CardType keepCardType;
+   private final Random rand;  
 
    // Constructs an UnoPlayer with the given playerNumber, hand, and cardType
    // Parameters:
    //    playerNumber = the unique number used to identify the player
    //    hand = the player's hand
    //    cardType = card type of the action card that player's is saving until they don't have any playable card
-   public UnoPlayer(int playerNumber, UnoHand hand, CardType cardType) {
+   public UnoPlayer(int playerNumber, UnoHand hand, CardType cardType, Random random) {
       this.playerNumber = playerNumber;
       this.hand = hand;
       this.keepCardType = cardType;
+      this.rand = random;
    }
 
    // Returns the player unique number
@@ -83,7 +85,6 @@ public class UnoPlayer {
                }
             }
             // Randominize which color is chosen
-            Random rand = new Random();
             int randomNum = rand.nextInt(maxNumColorIndexes.size());
             int maxNumRandomColorIndex = maxNumColorIndexes.get(randomNum);
                
@@ -128,7 +129,6 @@ public class UnoPlayer {
                }
             }
       
-            Random rand = new Random();
             // If there are only playble cards from the notSameKeepTypeCards list, play random card from notSameKeepTypeCards
             if (sameKeepTypeCards.isEmpty() || !notSameKeepTypeCards.isEmpty()) {
                int randIndex = rand.nextInt(notSameKeepTypeCards.size());
@@ -164,7 +164,6 @@ public class UnoPlayer {
             maxNumColorIndexes.add(i);
          }
       }
-      Random rand = new Random();
       int randomColor = rand.nextInt(maxNumColorIndexes.size());
       int maxNumColorIndex = maxNumColorIndexes.get(randomColor);
       
